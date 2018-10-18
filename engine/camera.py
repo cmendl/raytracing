@@ -8,6 +8,15 @@ class Camera(object):
     def __init__(self, lookfrom, lookat, vup, vfov, aspect, aperture, focus_dist):
         """
         Initialize camera position, orientation, field of view and aperture.
+
+        Args:
+            lookfrom: camera location within scene
+            lookat: coordinates towards which camera is oriented
+            vup: "up" direction
+            vfov: "field of view" angle, in rad
+            aspect: aspect ratio (width / height) of focus window
+            aperture: aperture (diameter) of camera lense
+            focus_dist: distance of focus plane from camera
         """
         self._lens_radius = aperture / 2
         # vfov is top to bottom in rad
@@ -30,6 +39,13 @@ class Camera(object):
         """
         Get a ray originating from a random position on the lense (to imitate
         depth of field), targeting the focus window at relative coordinates.
+
+        Args:
+            s: relative x-coordinate within focus window (real number between 0 and 1)
+            t: relative y-coordinate within focus window (real number between 0 and 1)
+
+        Returns:
+            Ray: generated ray
         """
         rd = self._lens_radius * random_in_unit_disk()
         offset = rd[0]*self._u + rd[1]*self._v

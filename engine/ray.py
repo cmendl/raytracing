@@ -10,4 +10,5 @@ class Ray(object):
         self.direction = direction
 
     def point_at_parameter(self, t):
+        """Compute point on ray at parameter `t`."""
         return self.origin + t*self.direction

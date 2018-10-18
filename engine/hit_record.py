@@ -10,7 +10,7 @@ class HitRecord(object):
         # intersection point
         self.point = point
         # surface normal at intersection point
-        assert abs(np.linalg.norm(normal) - 1) < 1e-13, 'hit record normal must be normalized'
+        assert abs(np.linalg.norm(normal) - 1) < 1e-11, 'hit record normal must be normalized'
         self.normal = normal
         # reference to material
         self.material = material

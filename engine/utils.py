@@ -2,7 +2,7 @@ import numpy as np
 
 
 def unit_vector(v):
-    """"Normalize vector `v`."""
+    """Normalize input vector `v`."""
     n = np.linalg.norm(v)
     if n > 0:
         return v / n

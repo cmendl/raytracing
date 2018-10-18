@@ -9,10 +9,25 @@ class Material(object):
 
     @abstractmethod
     def scatter(self, ray, rec):
-        """"Compute scattered ray and color attenuation factors for a ray hitting a surface material."""
+        """"
+        Compute scattered ray and color attenuation factors for a ray hitting a surface material.
+
+        Args:
+            ray: incoming ray
+            rec: corresponding hit record
+
+        Returns:
+            tuple: tuple containing
+              - scattered: scattered ray
+              - albedo:    reflectance per color channel
+        """
 
 
 class Lambertian(Material):
+    """"
+    Lambertian surface (ideal diffusive reflection),
+    specified by albedo (reflectance) per color channel.
+    """
 
     def __init__(self, a):
         self._albedo = a
@@ -23,6 +38,10 @@ class Lambertian(Material):
 
 
 class Metal(Material):
+    """"
+    Metal surface, specified by albedo (reflectance) per color channel
+    and fuzziness factor (scales random additive permutation of reflected ray).
+    """
 
     def __init__(self, a, f):
         self._albedo = a
@@ -39,6 +58,9 @@ class Metal(Material):
 
 
 class Dielectric(Material):
+    """
+    Dielectric surface, specified by ratio of the indices of refraction.
+    """
 
     def __init__(self, ri):
         self._ref_idx = ri
@@ -71,7 +93,7 @@ class Dielectric(Material):
 
 def reflect(v, n):
     """Reflect direction `v` at plane with normal `n`."""
-    assert abs(np.linalg.norm(n) - 1) < 1e-13, 'surface normal must be normalized'
+    assert abs(np.linalg.norm(n) - 1) < 1e-11, 'surface normal must be normalized'
     return v - 2*np.dot(v, n)*n
 
 
@@ -80,8 +102,8 @@ def refract(v, n, ni_over_nt):
     Compute direction of refracted ray according to Snell's law,
     or return None if no solution exists.
     """
-    assert abs(np.linalg.norm(v) - 1) < 1e-13, 'input ray direction must be normalized'
-    assert abs(np.linalg.norm(n) - 1) < 1e-13, 'surface normal must be normalized'
+    assert abs(np.linalg.norm(v) - 1) < 1e-11, 'input ray direction must be normalized'
+    assert abs(np.linalg.norm(n) - 1) < 1e-11, 'surface normal must be normalized'
     dt = np.dot(v, n)
     discriminant = 1 - ni_over_nt**2 * (1 - dt**2)
     if discriminant > 0:
@@ -91,6 +113,6 @@ def refract(v, n, ni_over_nt):
 
 
 def schlick(cosine, ref_idx):
-    """Schlick's approximation for specular reflection coefficient."""
+    """Schlick's approximation of specular reflection coefficient."""
     r0 = ((1 - ref_idx) / (1 + ref_idx))**2
     return r0 + (1 - r0) * (1 - cosine)**5

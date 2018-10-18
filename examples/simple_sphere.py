@@ -6,23 +6,7 @@ sys.path.append('../engine/')
 from surface import SurfaceAssembly, Sphere
 from material import Lambertian
 from camera import Camera
-from utils import unit_vector
-
-
-def color(ray, world, depth):
-    """Perform ray tracing and return color of ray."""
-    rec, _ = world.hit(ray, 0.001, 1e6)
-    if rec is not None:
-        scattered, attenuation = rec.material.scatter(ray, rec)
-        if depth > 0 and scattered is not None:
-             return attenuation * color(scattered, world, depth - 1)
-        else:
-            return np.zeros(3)
-    else:
-        # blue background sky
-        unitdir = unit_vector(ray.direction)
-        t = 0.5*(unitdir[1] + 1)
-        return (1 - t)*np.array([1.0, 1.0, 1.0]) + t*np.array([0.5, 0.7, 1.0])
+from rendering import ray_color
 
 
 def main():
@@ -58,7 +42,7 @@ def main():
                 u = (i + np.random.rand()) / nx
                 v = (j + np.random.rand()) / ny
                 ray = cam.get_ray(u, v)
-                col += color(ray, world, 50)
+                col += ray_color(ray, world, 50)
             col /= ns
 
             im[i, -(j + 1)] = np.round(255 * col).astype(int)
