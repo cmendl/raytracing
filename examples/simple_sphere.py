@@ -15,7 +15,7 @@ def main():
     nx = 200
     ny = 100
 
-    # number of samples for anti-aliasing
+    # number of samples (rays) per pixel
     ns = 100
 
     # define camera
