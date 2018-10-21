@@ -28,10 +28,10 @@ def main():
 
     mat = Lambertian(0.5)
 
-    # define world geometry
-    world = SurfaceAssembly()
-    world.add_object(Sphere(np.array([0.,    0.,  -1.]), 0.5, mat))
-    world.add_object(Sphere(np.array([0., -100.5, -1.]), 100, mat))
+    # define scene geometry
+    scene = SurfaceAssembly()
+    scene.add_object(Sphere(np.array([0.,    0.,  -1.]), 0.5, mat))
+    scene.add_object(Sphere(np.array([0., -100.5, -1.]), 100, mat))
 
     # fill image pixels
     im = np.zeros((nx, ny, 3), dtype=np.uint8)
@@ -42,7 +42,7 @@ def main():
                 u = (i + np.random.rand()) / nx
                 v = (j + np.random.rand()) / ny
                 ray = cam.get_ray(u, v)
-                col += ray_color(ray, world, 50)
+                col += ray_color(ray, scene, 50)
             col /= ns
 
             im[i, -(j + 1)] = np.round(255 * col).astype(int)
