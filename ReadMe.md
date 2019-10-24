@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/cmendl/raytracing.svg?branch=master)](https://travis-ci.com/cmendl/raytracing)
+
+
 Ray Tracing Implementation using Python
 =======================================
 
