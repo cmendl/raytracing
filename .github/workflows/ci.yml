@@ -20,4 +20,6 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install --only-binary=numpy numpy
       - name: Run tests
-        run: python3 -m unittest discover -s ./tests/
+        run: |
+          cd tests
+          python3 -m unittest discover -s ./
