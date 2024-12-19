@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/cmendl/raytracing.svg?token=zEFMyqfpDNmEX2xqm7Fe&branch=master)](https://travis-ci.com/cmendl/raytracing)
+[![Build Status](https://github.com/cmendl/raytracing/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/cmendl/raytracing/actions/workflows/ci.yml)
 
 
 Ray Tracing Implementation using Python
