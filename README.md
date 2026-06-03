@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/cmendl/raytracing/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/cmendl/raytracing/actions/workflows/ci.yml)
+[![Build Status](https://github.com/cmendl/raytracing/actions/workflows/ci.yml/badge.svg)](https://github.com/cmendl/raytracing/actions/workflows/ci.yml)
 
 
 Ray Tracing Implementation using Python
